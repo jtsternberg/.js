@@ -1,6 +1,7 @@
 jQuery(document).ready(function($){
 	setTimeout( function() {
-		var bcx = $('script:contains("bcx.accounts.addOrUpdate")');
+		var contains = 'bcx.accounts.addOrUpdate';
+		var bcx = jQuery('script:contains('+ contains +')');
 		if ( ! bcx.length )
 			return;
 
@@ -12,7 +13,8 @@ jQuery(document).ready(function($){
 		if ( typeof bcxobj.name === 'undefined' )
 			return;
 
-		var $me = $('span[data-behavior="todo_assignee_present"]:contains("'+ bcxobj.name +'")');
+		var behavior = 'todo_assignee_present';
+		var $me = $('span[data-behavior='+ behavior +']:contains('+ bcxobj.name +')');
 		if ( ! $me.length )
 			return;
 		$me.parents('.wrapper').css({
