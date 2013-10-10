@@ -10,11 +10,13 @@ jQuery(document).ready(function($){
 			return;
 
 		var bcxobj = jQuery.parseJSON( '{'+textobj[3]+'}' );
-		if ( typeof bcxobj.name === 'undefined' )
+		if ( typeof bcxobj.name === 'undefined' && typeof bcxobj.email_address === 'undefined' )
 			return;
 
 		var behavior = 'todo_assignee_present';
 		var $me = $('span[data-behavior='+ behavior +']:contains('+ bcxobj.name +')');
+		if ( ! $me.length )
+			$me = $('span[data-behavior='+ behavior +']:contains('+ bcxobj.email_address +')');
 		if ( ! $me.length )
 			return;
 		$me.parents('.wrapper').css({
