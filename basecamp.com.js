@@ -1,5 +1,6 @@
 jQuery(document).ready(function($){
-	setTimeout( function() {
+	function checkHighlights() {
+		console.log('checkHighlights');
 		var contains = 'bcx.accounts.addOrUpdate';
 		var bcx = jQuery('script:contains('+ contains +')');
 		if ( ! bcx.length )
@@ -25,5 +26,7 @@ jQuery(document).ready(function($){
 			'border-radius': '15px',
 			'margin-left': '-29px'
 		});
-	}, 1000);
+		// setTimeout( checkHighlights, 1500);
+	}
+	setTimeout( checkHighlights, 1500);
 });

@@ -1,26 +1,25 @@
-// javascript:var%20contains%20=%20%27bcx.accounts.addOrUpdate%27;var%20bcx%20=%20jQuery(%27script:contains(%27+%20contains%20+%27)%27);if%20(%20!%20bcx.length%20)return;var%20textobj%20=%20bcx.text().match(/(people.addOrUpdate\()({)([^;]*)}/);if%20(%20textobj%20===%20null%20||%20typeof%20textobj[3]%20===%20%27undefined%27%20)return;var%20bcxobj%20=%20jQuery.parseJSON(%20%27{%27+textobj[3]+%27}%27%20);if%20(%20typeof%20bcxobj.name%20===%20%27undefined%27%20&&%20typeof%20bcxobj.email_address%20===%20%27undefined%27%20)return;var%20behavior%20=%20%27todo_assignee_present%27;var%20$me%20=%20$(%27span[data-behavior=%27+%20behavior%20+%27]:contains(%27+%20bcxobj.name%20+%27)%27);if%20(%20!%20$me.length%20)$me%20=%20$(%27span[data-behavior=%27+%20behavior%20+%27]:contains(%27+%20bcxobj.email_address%20+%27)%27);if%20(%20!%20$me.length%20)return;$me.parents(%27.wrapper%27).css({%27background%27:%20%27#FFFF5C%27,%27padding%27:%20%275px%208px%205px%2030px%27,%27border-radius%27:%20%2715px%27,%27margin-left%27:%20%27-29px%27});
-var contains = 'bcx.accounts.addOrUpdate';
-var bcx = jQuery('script:contains('+ contains +')');
-if ( ! bcx.length )
-	return;
+// javascript:(function(){var%20email_address%20=%20window.bcx.people.models[0].get(%27email_address%27);var%20name%20=%20window.bcx.people.models[0].get(%27name%27);if%20(%20name%20&&%20email_address%20)%20{var%20behavior%20=%20%27todo_assignee_present%27;var%20$me%20=%20$(%27span[data-behavior=%27+%20behavior%20+%27]:contains(%27+%20name%20+%27)%27);if%20(%20!%20$me.length%20)%20{$me%20=%20$(%27span[data-behavior=%27+%20behavior%20+%27]:contains(%27+%20email_address%20+%27)%27);}if%20(%20$me.length%20)%20{$me.parents(%27.wrapper%27).css({%27background%27:%20%27#FFFF5C%27,%27padding%27:%20%275px%208px%205px%2030px%27,%27border-radius%27:%20%2715px%27,%27margin-left%27:%20%27-29px%27});}}})();
 
-var textobj = bcx.text().match(/(people.addOrUpdate\()({)([^;]*)}/);
-if ( textobj === null || typeof textobj[3] === 'undefined' )
-	return;
 
-var bcxobj = jQuery.parseJSON( '{'+textobj[3]+'}' );
-if ( typeof bcxobj.name === 'undefined' && typeof bcxobj.email_address === 'undefined' )
-	return;
+(function(){
+	var email_address = window.bcx.people.models[0].get('email_address');
+	var name  = window.bcx.people.models[0].get('name');
 
-var behavior = 'todo_assignee_present';
-var $me = $('span[data-behavior='+ behavior +']:contains('+ bcxobj.name +')');
-if ( ! $me.length )
-	$me = $('span[data-behavior='+ behavior +']:contains('+ bcxobj.email_address +')');
-if ( ! $me.length )
-	return;
-$me.parents('.wrapper').css({
-	'background': '#FFFF5C',
-	'padding': '5px 8px 5px 30px',
-	'border-radius': '15px',
-	'margin-left': '-29px'
-});
+	if ( name && email_address ) {
+		var behavior = 'todo_assignee_present';
+		var $me = $('span[data-behavior='+ behavior +']:contains('+ name +')');
+		if ( ! $me.length ) {
+			$me = $('span[data-behavior='+ behavior +']:contains('+ email_address +')');
+		}
+		if ( $me.length ) {
+			$me.parents('.wrapper').css({
+				'background': '#FFFF5C',
+				'padding': '5px 8px 5px 30px',
+				'border-radius': '15px',
+				'margin-left': '-29px'
+			});
+		}
+	}
+})();
+
+// for the new people @here, I use this on a near-daily basis for seeing the tasks assigned to me more easily in BC: http://dsgnwrks.pro/plugins-and-scripts/bookmarklet-to-highlight-tasks-assigned-to-me-in-new-basecamp/
